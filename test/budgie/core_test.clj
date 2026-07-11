@@ -1,4 +1,4 @@
-(ns core
+(ns budgie.core-test
   (:require
     [budgie.core :refer [add]]
     [clojure.test :refer [deftest testing is]]))
