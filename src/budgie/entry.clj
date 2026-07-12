@@ -17,10 +17,10 @@
 
 (defn create
   [category transaction-type transaction-amount]
-  {:id (random-uuid),
-   :category category,
-   :transaction {:type transaction-type, :amount transaction-amount},
-   :created-at (java.util.Date.),
+  {:id (random-uuid)
+   :category category
+   :transaction {:type transaction-type :amount transaction-amount}
+   :created-at (java.util.Date.)
    :updated-at nil})
 
 (s/fdef create
