@@ -10,5 +10,6 @@
                            org.clojure/test.check {:mvn/version "1.1.1"}}
                         :extra-paths ["test"]
                         :main-opts ["-m" "kaocha.runner" "--watch"]}}
- :deps {org.clojure/clojure {:mvn/version "1.13.0-alpha3"}}
+ :deps {babashka/fs {:mvn/version "0.5.25"}
+        org.clojure/clojure {:mvn/version "1.13.0-alpha3"}}
  :paths ["src" "test"]}
