@@ -21,6 +21,14 @@
     (spit (str path) (pr-str entry))
     path))
 
+(defn read-entries
+  "Reads all entries written to the file system."
+  []
+  (->> (fs/list-dir default-path)
+       (filter #(= "edn" (fs/extension %)))
+       (map #(slurp (str %)))
+       (map edn/read-string)))
+
 (defn read-entry
   "Reads budget entry from a file via id, or from a raw file path with `:path`."
   ([id] (read-entry :id id))

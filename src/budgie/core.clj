@@ -18,6 +18,6 @@
       (pp/pprint ":mode unimplemented"))))
 
 (comment
-  (-main {:mode :write :category :leisure :amount -100})
   (-main {:mode :list})
+  (-main {:mode :write :category :leisure :amount -100})
   (-main {:mode :read :id "some-id"}))

@@ -44,6 +44,14 @@
       (let [path (storage/write-entry! test-entry)]
         (is (= test-entry (storage/read-entry :path path)))))))
 
+(deftest read-entries-test
+  (testing "Reading all edn-file entries"
+    (with-redefs [storage/default-path @test-path]
+      (let [other-entry {:id "other-id" :some :other-data}]
+        (storage/write-entry! test-entry)
+        (storage/write-entry! other-entry)
+        (is (= #{test-entry other-entry} (set (storage/read-entries))))))))
+
 (deftest read-entry-missing-file-test
   (testing "Missing entry files return nil"
     (with-redefs [storage/default-path @test-path]
