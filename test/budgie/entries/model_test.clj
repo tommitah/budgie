@@ -1,9 +1,9 @@
-(ns budgie.entry-test
-  (:require [budgie.entry :as entry]
-            [clojure.test :refer [deftest testing is]]
+(ns budgie.entries.model-test
+  (:require [budgie.entries.model :as entry]
             [clojure.spec.alpha :as s]
             [clojure.spec.gen.alpha :as gen]
-            [clojure.spec.test.alpha :as stest]))
+            [clojure.spec.test.alpha :as stest]
+            [clojure.test :refer [deftest is testing]]))
 
 (deftest entry-spec-generates-valid-values
   (testing "Budget entry spec"

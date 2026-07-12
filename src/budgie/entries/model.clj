@@ -1,8 +1,6 @@
-(ns budgie.entry
+(ns budgie.entries.model
   (:require [clojure.spec.alpha :as s]))
 
-;; --------------- DOMAIN MODEL --------------- ;;
-;; This is the data a budget entry line consists of:
 (s/def :entry/id uuid?)
 (s/def :entry/category #{:leisure :housing :travel :grocery :experience :hobby})
 (s/def :entry/created-at inst?)
@@ -15,13 +13,15 @@
   (s/keys :req-un [:entry/id :entry/category :entry/transaction
                    :entry/created-at :entry/updated-at]))
 
-(defn -transaction-type [amount] (if (pos? amount) :income :expense))
+(defn- transaction-type
+  [amount]
+  (if (pos? amount) :income :expense))
 
 (defn create
   [category transaction-amount]
   {:id (random-uuid)
    :category category
-   :transaction {:type (-transaction-type transaction-amount)
+   :transaction {:type (transaction-type transaction-amount)
                  :amount transaction-amount}
    :created-at (java.util.Date.)
    :updated-at nil})
