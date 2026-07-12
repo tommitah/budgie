@@ -31,7 +31,3 @@
       :write (use-write-entry opts)
       :list (use-list-entry opts)
       (pp/pprint ":mode unimplemented"))))
-
-(comment
-  (bentry/create :leisure -100)
-  (bentry/create :hobby 201.45))

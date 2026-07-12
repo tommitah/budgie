@@ -2,20 +2,20 @@
   (:require [babashka.fs :as fs]
             [clojure.edn :as edn]))
 
-(def default-path
+(def ^:private default-path
   (fs/path (System/getProperty "user.home") ".budgie" "storage" "file"))
 
-(defn ^:private -ensure-dir! [path] (fs/create-dirs path))
+(defn- ensure-dir! [path] (fs/create-dirs path))
 
-(defn -entry-file-path [id] (fs/path default-path (str id ".edn")))
+(defn- entry-file-path [id] (fs/path default-path (str id ".edn")))
 
 (defn write-entry!
   "Writes budget entry contents into a file named via the uuid of the entry data.\n
   Ensures the file directory exists on the local machine.\n
   Returns file path."
   [entry]
-  (-ensure-dir! default-path)
-  (let [path (-entry-file-path (:id entry))]
+  (ensure-dir! default-path)
+  (let [path (entry-file-path (:id entry))]
     (spit (str path) (pr-str entry))
     path))
 
@@ -24,7 +24,7 @@
   ([id] (read-entry :id id))
   ([source value]
    (let [path (case source
-                :id (-entry-file-path value)
+                :id (entry-file-path value)
                 :path value)]
      (try (-> path
               (str)
@@ -34,8 +34,8 @@
 
 (comment
   (write-entry! {:id "some_id" :foo "bar"})
-  (str (-entry-file-path "some_id"))
+  (str (entry-file-path "some_id"))
   (read-entry "some_id")
-  (read-entry :path (-entry-file-path "some_id"))
+  (read-entry :path (entry-file-path "some_id"))
   (pr-str {:id "some-id" :foo :bar})
   (str (fs/path default-path (str (:id {:id "some-id" :foo :bar}) ".edn"))))
