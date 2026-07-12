@@ -33,6 +33,12 @@
       (m/write-entry! test-entry)
       (is (= test-entry (m/read-entry test-id))))))
 
+(deftest read-entry-from-path-test
+  (testing "Reading edn-file entry data from a raw file path"
+    (with-redefs [m/default-path @test-path]
+      (let [path (m/write-entry! test-entry)]
+        (is (= test-entry (m/read-entry :path path)))))))
+
 (deftest read-entry-missing-file-test
   (testing "Missing entry files return nil"
     (with-redefs [m/default-path @test-path]
