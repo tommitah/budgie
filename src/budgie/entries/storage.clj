@@ -5,13 +5,9 @@
 (def default-path
   (fs/path (System/getProperty "user.home") ".budgie" "storage" "file"))
 
-(defn- ensure-dir!
-  [path]
-  (fs/create-dirs path))
+(defn- ensure-dir! [path] (fs/create-dirs path))
 
-(defn entry-file-path
-  [id]
-  (fs/path default-path (str id ".edn")))
+(defn entry-file-path [id] (fs/path default-path (str id ".edn")))
 
 (defn write-entry!
   "Writes budget entry contents into a file named via the uuid of the entry data.
@@ -27,8 +23,7 @@
 
 (defn read-entry
   "Reads budget entry from a file via id, or from a raw file path with `:path`."
-  ([id]
-   (read-entry :id id))
+  ([id] (read-entry :id id))
   ([source value]
    (let [path (case source
                 :id (entry-file-path value)

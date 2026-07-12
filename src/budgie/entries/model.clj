@@ -13,9 +13,7 @@
   (s/keys :req-un [:entry/id :entry/category :entry/transaction
                    :entry/created-at :entry/updated-at]))
 
-(defn- transaction-type
-  [amount]
-  (if (pos? amount) :income :expense))
+(defn- transaction-type [amount] (if (pos? amount) :income :expense))
 
 (defn create
   [category transaction-amount]
