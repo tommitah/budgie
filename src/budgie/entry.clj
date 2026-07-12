@@ -15,16 +15,18 @@
   (s/keys :req-un [:entry/id :entry/category :entry/transaction
                    :entry/created-at :entry/updated-at]))
 
+(defn -transaction-type [amount] (if (pos? amount) :income :expense))
+
 (defn create
-  [category transaction-type transaction-amount]
+  [category transaction-amount]
   {:id (random-uuid)
    :category category
-   :transaction {:type transaction-type :amount transaction-amount}
+   :transaction {:type (-transaction-type transaction-amount)
+                 :amount transaction-amount}
    :created-at (java.util.Date.)
    :updated-at nil})
 
 (s/fdef create
   :args (s/cat :category :entry/category
-               :transaction-type :entry/type
                :transaction-amount :entry/amount)
   :ret :entry/item)
