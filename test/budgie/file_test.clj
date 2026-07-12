@@ -26,3 +26,14 @@
             actual-path (m/write-entry! test-entry)]
         (is (= (str expected-path) (str actual-path)))
         (is (= test-entry (edn/read-string (slurp (str actual-path)))))))))
+
+(deftest read-entry-test
+  (testing "Reading edn-file entry data"
+    (with-redefs [m/default-path @test-path]
+      (m/write-entry! test-entry)
+      (is (= test-entry (m/read-entry test-id))))))
+
+(deftest read-entry-missing-file-test
+  (testing "Missing entry files return nil"
+    (with-redefs [m/default-path @test-path]
+      (is (nil? (m/read-entry "missing-id"))))))
