@@ -1,15 +1,19 @@
-{:aliases {; `dev` aliases include code in `dev/` that can be evaluated (or
-           ; immediately run like `user/reload`)
-           :dev {:extra-paths ["dev"]}
-           :test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}
-                               org.clojure/test.check {:mvn/version "1.1.1"}}
-                  :extra-paths ["test"]
-                  :main-opts ["-m" "kaocha.runner"]}
-           :test-watch {:extra-deps
-                          {lambdaisland/kaocha {:mvn/version "1.91.1392"}
-                           org.clojure/test.check {:mvn/version "1.1.1"}}
-                        :extra-paths ["test"]
-                        :main-opts ["-m" "kaocha.runner" "--watch"]}}
+{:aliases
+   {; `dev` aliases include code in `dev/` that can be evaluated (or
+    ; immediately run like `user/reload`)
+    :dev {:extra-deps {org.clojure/tools.namespace {:mvn/version "1.5.0"}}
+          :extra-paths ["dev"]}
+    :splint {:extra-deps {io.github.noahtheduke/splint {:mvn/version "1.24.0"}}
+             :main-opts ["-m" "noahtheduke.splint"]}
+    :test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}
+                        org.clojure/test.check {:mvn/version "1.1.1"}}
+           :extra-paths ["test"]
+           :main-opts ["-m" "kaocha.runner"]}
+    :test-watch {:extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}
+                              org.clojure/test.check {:mvn/version "1.1.1"}}
+                 :extra-paths ["test"]
+                 :main-opts ["-m" "kaocha.runner" "--watch"]}}
  :deps {babashka/fs {:mvn/version "0.5.25"}
-        org.clojure/clojure {:mvn/version "1.13.0-alpha3"}}
- :paths ["src" "test"]}
+        org.clojure/clojure {:mvn/version "1.13.0-alpha3"}
+        io.pedestal/pedestal.http-kit {:mvn/version "0.8.1"}}
+ :paths ["src"]}

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# this runs the cli program
+clojure -X budgie.cli.core/-main "$@"

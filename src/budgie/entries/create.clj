@@ -1,9 +1,9 @@
-(ns budgie.entries.write
+(ns budgie.entries.create
   (:require [budgie.entries.model :as entry]
             [budgie.entries.storage :as storage]
             [clojure.pprint :as pp]))
 
-(defn run
+(defn create-entry
   [opts]
   (try (let [{:keys [category amount]} opts
              entry (entry/create category amount)

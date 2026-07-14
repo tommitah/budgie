@@ -1,23 +1,5 @@
 (ns budgie.core
-  (:require [budgie.entries.list :as list-entry]
-            [budgie.entries.read :as read-entry]
-            [budgie.entries.write :as write-entry]
-            [clojure.pprint :as pp]))
+  (:require [clojure.pprint :as pp]
+            [budgie.http.web-server :as ws]))
 
-(defn add "Naively adds two numbers together" [x & xs] (apply + x xs))
-
-(defn -main
-  [opts]
-  ;; todo: spec out the cli opts in `cli_command`
-  (println "Calling with options: " opts)
-  (let [mode (:mode opts)]
-    (case mode
-      :read (read-entry/run opts)
-      :write (write-entry/run opts)
-      :list (list-entry/run opts)
-      (pp/pprint ":mode unimplemented"))))
-
-(comment
-  (-main {:mode :list})
-  (-main {:mode :write :category :leisure :amount -100})
-  (-main {:mode :read :id "some-id"}))
+(defn -main [& args] (pp/pprint "Starting Web Server...") (ws/start args))

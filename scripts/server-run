@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
+# this runs the web server
 clojure -X budgie.core/-main "$@"
