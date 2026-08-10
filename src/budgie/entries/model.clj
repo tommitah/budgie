@@ -1,5 +1,6 @@
 (ns budgie.entries.model
-  (:require [clojure.spec.alpha :as s]))
+  (:require [clojure.spec.alpha :as s]
+            [clojure.spec.test.alpha :as stest]))
 
 (s/def :entry/id uuid?)
 (s/def :entry/category #{:leisure :housing :travel :grocery :experience :hobby})
@@ -28,3 +29,5 @@
   :args (s/cat :category :entry/category
                :transaction-amount :entry/amount)
   :ret :entry/item)
+
+(stest/instrument `create)
