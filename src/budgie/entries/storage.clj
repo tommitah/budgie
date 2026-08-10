@@ -11,9 +11,7 @@
 
 (defn write-entry!
   "Writes budget entry contents into a file named via the uuid of the entry data.
-
   Ensures the file directory exists on the local machine.
-
   Returns file path."
   [entry]
   (ensure-dir! default-path)

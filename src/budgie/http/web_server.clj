@@ -2,6 +2,7 @@
   (:require [io.pedestal.connector :as conn]
             [io.pedestal.http.http-kit :as hk]
             [budgie.http.routes :as r]
+            [budgie.http.interceptor :as i]
             [io.pedestal.connector.test :as test]))
 
 (defonce ^:private *connector (atom nil))
@@ -12,6 +13,7 @@
   (println "Connecting to port" (or port default-port))
   (-> (conn/default-connector-map (or port default-port))
       (conn/with-default-interceptors)
+      (conn/with-interceptors [i/request-handling-duration-interceptor])
       (conn/with-routes r/routes)
       (hk/create-connector nil)))
 
@@ -31,7 +33,10 @@
   (test/response-for @*connector verb url))
 
 (comment
+  (test-request :get "/entry/foo/bar")
   (test-request :get "/entry")
+  (test-request :get "/unimplemented")
+  (test-request :get "/greet?foo=1")
   (dissoc *1 :body)
   (start {})
   (stop)

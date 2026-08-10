@@ -5,9 +5,7 @@
 
 (def routes
   #{["/greet" :get greet-handler :route-name :greet]
-    ["/entry" :post util/echo :route-name :list-create]
-    ["/entry" :get util/echo :route-name :list-query-form]
-    ["/entry/:list-id" :get util/echo :route-name :list-view]
-    ["/entry/:list-id" :post util/echo :route-name :list-item-create]
-    ["/entry/:list-id/:item-id" :get util/echo :route-name :list-item-view]
-    ["/entry/:list-id/:item-id" :put util/echo :route-name :list-item-update]})
+    ["/entry" :post util/echo :route-name :entry-create]
+    ["/entry" :get util/echo :route-name :entry-list-query-form]
+    ["/entry/:item-id" :get util/echo :route-name :entry-get]
+    ["/entry/:item-id" :put util/echo :route-name :entry-update]})
