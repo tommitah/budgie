@@ -36,7 +36,7 @@
   (test-request :get "/entry/foo/bar")
   (test-request :get "/entry")
   (test-request :get "/unimplemented")
-  (test-request :get "/greet?foo=1")
+  (test-request :get #p "/greet?foo=1")
   (dissoc *1 :body)
   (start {})
   (stop)
