@@ -1,7 +1,5 @@
 (ns budgie.cli.core
-  (:require [budgie.entries.create :as ec]
-            [budgie.entries.list :as el]
-            [budgie.entries.query :as eq]
+  (:require [budgie.entries.core :as e]
             [clojure.pprint :as pp]))
 
 (defn -main
@@ -11,8 +9,8 @@
   (println "Calling with options: " opts)
   (let [mode (:mode opts)]
     (case mode
-      :read (eq/query-entry opts)
-      :write (ec/create-entry opts)
-      :list (el/list-entries opts)
+      :read (e/query opts)
+      :write (e/create opts)
+      :list (e/list-all opts)
       (pp/pprint ":mode unimplemented"))))
 

@@ -16,7 +16,7 @@
 
 (defn- transaction-type [amount] (if (pos? amount) :income :expense))
 
-(defn create
+(defn make-entry
   [category transaction-amount]
   {:id (random-uuid)
    :category category
@@ -30,4 +30,4 @@
                :transaction-amount :entry/amount)
   :ret :entry/item)
 
-(stest/instrument `create)
+(stest/instrument `make-entry)
