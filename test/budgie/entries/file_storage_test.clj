@@ -1,6 +1,6 @@
-(ns budgie.entries.storage-test
+(ns budgie.entries.file-storage-test
   (:require [babashka.fs :as fs]
-            [budgie.entries.storage :as storage]
+            [budgie.entries.file-storage :as storage]
             [clojure.edn :as edn]
             [clojure.test :refer [deftest is testing use-fixtures]]))
 
@@ -10,17 +10,12 @@
 
 (defn clean-test-files!
   []
-  (when (and @test-path (fs/exists? @test-path))
-    (fs/delete-tree @test-path)))
+  (when (and @test-path (fs/exists? @test-path)) (fs/delete-tree @test-path)))
 
 (defn with-test-path
   [test-fn]
   (reset! test-path (fs/create-temp-dir {:prefix "budgie-test-"}))
-  (try
-    (test-fn)
-    (finally
-      (clean-test-files!)
-      (reset! test-path nil))))
+  (try (test-fn) (finally (clean-test-files!) (reset! test-path nil))))
 
 (use-fixtures :each with-test-path)
 

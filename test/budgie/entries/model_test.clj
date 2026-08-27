@@ -13,6 +13,6 @@
 
 (deftest create-check
   (testing "entry/create satisfies its function spec"
-    (let [results (stest/check `entry/create)]
+    (let [results (stest/check `entry/make-entry)]
       (is (= 1 (count results)))
       (is (every? nil? (map :failure results))))))

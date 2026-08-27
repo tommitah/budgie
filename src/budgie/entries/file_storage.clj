@@ -1,4 +1,4 @@
-(ns budgie.entries.storage
+(ns budgie.entries.file-storage
   (:require [babashka.fs :as fs]
             [clojure.edn :as edn]))
 

@@ -1,6 +1,6 @@
 (ns budgie.entries.core
   (:require [budgie.entries.model :as m]
-            [budgie.entries.storage :as s]
+            [budgie.entries.file-storage :as fs]
             [clojure.pprint :as pp]))
 
 (defn query [opts] (pp/pprint (s/read-entry (:id opts))))
@@ -11,8 +11,8 @@
   [opts]
   (try (let [{:keys [category amount]} opts
              entry (m/make-entry category amount)
-             path (s/write-entry! entry)
-             full-entry (s/read-entry :path (str path))]
+             path (fs/write-entry! entry)
+             full-entry (fs/read-entry :path (str path))]
          (println "Created entry:")
          (pp/pprint full-entry))
        (catch Exception e

@@ -25,7 +25,7 @@
    :created-at (java.util.Date.)
    :updated-at nil})
 
-(s/fdef create
+(s/fdef make-entry
   :args (s/cat :category :entry/category
                :transaction-amount :entry/amount)
   :ret :entry/item)
